@@ -4,7 +4,9 @@
 
 # Defense Template specific ignores
 application/
-data/
+data/geodatabases/
+data/layers/
+maps/
 
 # General
 .metadata
