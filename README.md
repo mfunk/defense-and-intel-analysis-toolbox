@@ -16,9 +16,27 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 ### General Help
 [New to Github? Get started here.](http://htmlpreview.github.com/?https://github.com/Esri/esri.github.com/blob/master/help/esri-getting-to-know-github.html)
 
+### Getting Started with the toolbox
+* Install and configure Apache Ant
+    * Download from http://ant.apache.org and unzip to a location on your machine
+    * Set environment variable ANT_HOME to Ant Install Location
+    * Add Ant\bin to your path: %ANT_HOME%\bin
+    * You may optionally install the PyDev Eclipse Plugin for Python
+* To download the data dependencies 
+    * Open Command Prompt>
+    * cd defense-and-intel-analysis-toolbox\data
+    * > ant
+    * Verify “Build Succeeded”  
+* To run unit tests
+    * Open Command Prompt>
+    * > cd defense-and-intel-analysis-toolbox\source\test
+    * > ant
+    * Verify “Build Succeeded”  
+
 ## Requirements
 
 * ArcGIS Desktop 10.1 Standard 
+* Apache Ant - used to download and extract dependent data and run test drivers
 * Some tools require additional licenses (they will be disabled if not available):
 * ArcGIS Desktop Advanced 
 * ArcGIS Spatial Analyst Extension
@@ -30,11 +48,11 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 
 ## Issues
 
-Find a bug or want to request a new feature?  Please let us know by submitting an issue.
+* Find a bug or want to request a new feature?  Please let us know by submitting an issue.
 
 ## Contributing
 
-Anyone and everyone is welcome to contribute.
+* Anyone and everyone is welcome to contribute.
 
 ## Licensing
 
