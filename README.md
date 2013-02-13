@@ -8,7 +8,7 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 
 * Specialized geoprocessing models and tools for defense and intelligence analysis including
 * Tools for visibility and range analysis
-* Tools for analyzing the battlefield  environment
+* Tools for analyzing the battlefield environment
 * Tools for position analysis
 
 ## Instructions
