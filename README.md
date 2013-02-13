@@ -18,10 +18,12 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 
 ### Getting Started with the toolbox
 * Install and configure Apache Ant
-    * Download from http://ant.apache.org and unzip to a location on your machine
-    * Set environment variable ANT_HOME to Ant Install Location
-    * Add Ant\bin to your path: %ANT_HOME%\bin
-    * You may optionally install the PyDev Eclipse Plugin for Python
+    * Download Ant from the [Apache Ant Project](http://ant.apache.org/bindownload.cgi) and unzip to a location on your machine
+    * Set environment variable `ANT_HOME` to Ant Install Location
+    * Add Ant\bin to your path: `%ANT_HOME%\bin`
+    * NOTE: Ant requires the [Java Developer Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) to be installed and the environment variable `JAVA_HOME` to be set to this location
+    * To verify your Ant Installation: Open Command Prompt> `ant -v` and verify it runs and returns the version correctly 
+    * You may optionally install the [PyDev Eclipse Plugin for Python](http://pydev.org) if you plan to use Eclipse to run/debug
 * To download the data dependencies 
     * Open Command Prompt>
     * cd defense-and-intel-analysis-toolbox\data

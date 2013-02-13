@@ -7,6 +7,7 @@ application/
 data/geodatabases/
 data/layers/
 maps/
+scratch/
 
 # General
 .metadata
