@@ -1,6 +1,6 @@
-# Name: TestModelRangeRings.py
-# Description: Automatic Test of Range Rings Model
-# Requirements: ArcGIS Desktop Standard
+# Name: TestModelRangeFan.py
+# Description: Automatic Test of Range Fan Model
+# Requirements: ArcGIS Desktop Standard with Spatial Analyst Extension
 
 import arcpy
 import os
@@ -11,21 +11,28 @@ import TestUtilities
 
 def RunTest():
     try:
-        arcpy.AddMessage("Starting Test: RangeRings")
+        arcpy.AddMessage("Starting Test: RangeFans")
+        
+        if arcpy.CheckExtension("3D") == "Available":
+            arcpy.CheckOutExtension("Spatial")
+        else:
+            # Raise a custom exception
+            raise Exception("LicenseError")        
         
         # WORKAROUND
         print "Creating New Scratch Workspace (Workaround)"    
         TestUtilities.createScratch()
             
         # Verify the expected configuration exists
-        inputPointsFC =  os.path.join(TestUtilities.inputGDB, "sampleRangePoints")
-        outputRangeRingsFC =  os.path.join(TestUtilities.outputGDB, "RangeRings")
-        outputRangeRadialsFC =  os.path.join(TestUtilities.outputGDB, "RangeRadials") 
+        inputPointsFC =  os.path.join(TestUtilities.defaultGDB, "sampleRangePoints")
+        inputSurface =  os.path.join(TestUtilities.defaultGDB, "Jbad_SRTM_USGS_EROS")
+        outputRangeFansFC =  os.path.join(TestUtilities.outputGDB, "RangeFans")
+        outputRangeVizFC =  os.path.join(TestUtilities.outputGDB, "RangeViz") 
         toolbox = TestUtilities.toolbox
         
         # Check For Valid Input
         objects2Check = []
-        objects2Check.extend([inputPointsFC, toolbox])
+        objects2Check.extend([inputPointsFC, inputSurface, toolbox])
         for object2Check in objects2Check :
             desc = arcpy.Describe(object2Check)
             if desc == None :
@@ -48,34 +55,34 @@ def RunTest():
         if (inputFeatureCount < 1) :
             print "Invalid Input Feature Count: " +  str(inputFeatureCount)
                        
-        numberOfRings = 5
-        ringInterval = 1000.0
-        distanceUnits = "METERS"
-        numberOfRadials = 8
+        maximumRange = 1000.0
+        bearing = 150.0
+        traversal = 22.0
+        oberverHeight = 2.0
            
         ########################################################3
         # Execute the Model under test:   
-        arcpy.RangeRings_VandRAlias(inputPointsFC, numberOfRings, ringInterval, distanceUnits, numberOfRadials, outputRangeRingsFC, outputRangeRadialsFC)
+        arcpy.RangeFan_VandRAlias(inputPointsFC, maximumRange, bearing, traversal, inputSurface, outputRangeFansFC, outputRangeVizFC, oberverHeight)
         ########################################################3
     
         # Verify the results    
-        outputFeatureCountRings = int(arcpy.GetCount_management(outputRangeRingsFC).getOutput(0)) 
-        print "Output FeatureClass: " + str(outputRangeRingsFC)
-        print "Output Feature Count: " +  str(outputFeatureCountRings)
+        outputFeatureCountFans = int(arcpy.GetCount_management(outputRangeFansFC).getOutput(0)) 
+        print "Output FeatureClass: " + str(outputRangeFansFC)
+        print "Output Feature Count: " +  str(outputFeatureCountFans)
     
-        outputFeatureCountRadials = int(arcpy.GetCount_management(outputRangeRadialsFC).getOutput(0))
-        print "Output FeatureClass: " + str(outputRangeRadialsFC)
-        print "Output Feature Count: " +  str(outputFeatureCountRadials)
+        outputFeatureCountViz = int(arcpy.GetCount_management(outputRangeVizFC).getOutput(0))
+        print "Output FeatureClass: " + str(outputRangeVizFC)
+        print "Output Feature Count: " +  str(outputFeatureCountViz)
                 
-        if (outputFeatureCountRings < 1) or (outputFeatureCountRadials < 1) :
-            print "Invalid Input Feature Count: " +  str(outputFeatureCountRings)
-            raise Exception("Test Failed")            
+        if (outputFeatureCountFans < 1) or (outputFeatureCountViz < 1):
+            print "Invalid Output Feature Count: " +  str(outputFeatureCountFans) + ":" + str(outputFeatureCountViz) 
+            raise Exception("Test Failed")
             
         # WORKAROUND: delete scratch db
         print "Deleting Scratch Workspace (Workaround)"    
         TestUtilities.deleteScratch()        
         
-        print "Test Successful"        
+        print "Test Successful"
                 
     except arcpy.ExecuteError: 
         # Get the tool error messages 
@@ -100,5 +107,10 @@ def RunTest():
     
         # return a system error code
         sys.exit(-1)
+        
+    finally:
+        # Check in the 3D Analyst extension
+        arcpy.CheckInExtension("Spatial")        
+        
 
 RunTest()
