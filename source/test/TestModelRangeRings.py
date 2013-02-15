@@ -68,7 +68,7 @@ def RunTest():
         print "Output Feature Count: " +  str(outputFeatureCountRadials)
                 
         if (outputFeatureCountRings < 1) or (outputFeatureCountRadials < 1) :
-            print "Invalid Input Feature Count: " +  str(outputFeatureCountRings)
+            print "Invalid Output Feature Count: " +  str(outputFeatureCountRings) + ":" + str(outputFeatureCountRadials)
             raise Exception("Test Failed")            
             
         # WORKAROUND: delete scratch db

@@ -11,14 +11,15 @@
 
   <property name="pythonpath" value="${dir.arcpy}\DLLs;${dir.arcpy}\lib;${dir.arcpy}\lib\plat-win;${dir.arcpy}\lib\lib-tk;${dir.arcpy};${dir.arcpy}\lib\site-packages;${dir.arcgisdesktop}\bin;${dir.arcgisdesktop}\arcpy"/>
 
-  <target name="run_all_tests" depends="get_data,test_config,test_range_rings,test_range_fan">
+  <target name="run_all_tests" 
+    depends="get_data,test_config,test_range_rings,test_range_fan,test_radial_line_of_sight">
     <echo message="All Tests Complete" />
   </target>
 
   <target name="get_data">
     <!-- TODO: determine if we need to run data fetch script here @ ../../data/build.xml -->
     <!-- TODO: for now just issue a warning -->
-    <!-- TODO: if needed, change the target in the line below to "default" -->
+    <!-- TODO: if needed, change the target in the line below to target="default" -->
     <ant antfile="${dir.datadir}/build.xml" target="test" />
     <echo message="INFO: Has Dependent Data task been run from: ${dir.datadir}/build.xml" />
   </target>
@@ -44,6 +45,14 @@
       <env key="PYTHONPATH" path="${pythonpath}"/>
       <arg line="-u"/>
       <arg line="${dir.src}/TestModelRangeFan.py"/>
+    </exec>
+  </target>
+
+  <target name="test_radial_line_of_sight">
+    <exec executable="${dir.arcpy}/python.exe" failonerror="true">
+      <env key="PYTHONPATH" path="${pythonpath}"/>
+      <arg line="-u"/>
+      <arg line="${dir.src}/TestModelRadialLineOfSight.py"/>
     </exec>
   </target>
 

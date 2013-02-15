@@ -1,5 +1,5 @@
-# Name: TestModelRangeFan.py
-# Description: Automatic Test of Range Fan Model
+# Name: TestModelRadialLineOfSight.py
+# Description: Automatic Test of Radial Line Of Sight Model
 # Requirements: ArcGIS Desktop Standard with Spatial Analyst Extension
 
 import arcpy
@@ -11,7 +11,7 @@ import TestUtilities
 
 def RunTest():
     try:
-        arcpy.AddMessage("Starting Test: RangeFans")
+        arcpy.AddMessage("Starting Test: TestModelRadialLineOfSight")
         
         if arcpy.CheckExtension("Spatial") == "Available":
             arcpy.CheckOutExtension("Spatial")
@@ -24,10 +24,9 @@ def RunTest():
         TestUtilities.createScratch()
             
         # Verify the expected configuration exists
-        inputPointsFC =  os.path.join(TestUtilities.defaultGDB, "sampleRangePoints")
+        inputPointsFC =  os.path.join(TestUtilities.inputGDB, "RlosObserverWebMerc")
         inputSurface =  os.path.join(TestUtilities.defaultGDB, "Jbad_SRTM_USGS_EROS")
-        outputRangeFansFC =  os.path.join(TestUtilities.outputGDB, "RangeFans")
-        outputRangeVizFC =  os.path.join(TestUtilities.outputGDB, "RangeViz") 
+        outputVizFC =  os.path.join(TestUtilities.outputGDB, "RlosVizOutput") 
         toolbox = TestUtilities.toolbox
         
         # Check For Valid Input
@@ -55,27 +54,20 @@ def RunTest():
         if (inputFeatureCount < 1) :
             print "Invalid Input Feature Count: " +  str(inputFeatureCount)
                        
-        maximumRange = 1000.0
-        bearing = 150.0
-        traversal = 22.0
-        oberverHeight = 2.0
+        forceVisibilityToInfinity = False
            
         ########################################################3
         # Execute the Model under test:   
-        arcpy.RangeFan_VandRAlias(inputPointsFC, maximumRange, bearing, traversal, inputSurface, outputRangeFansFC, outputRangeVizFC, oberverHeight)
+        arcpy.RadialLineOfSight_VandRAlias(inputPointsFC, inputSurface, outputVizFC, forceVisibilityToInfinity)
         ########################################################3
     
         # Verify the results    
-        outputFeatureCountFans = int(arcpy.GetCount_management(outputRangeFansFC).getOutput(0)) 
-        print "Output FeatureClass: " + str(outputRangeFansFC)
-        print "Output Feature Count: " +  str(outputFeatureCountFans)
-    
-        outputFeatureCountViz = int(arcpy.GetCount_management(outputRangeVizFC).getOutput(0))
-        print "Output FeatureClass: " + str(outputRangeVizFC)
+        outputFeatureCountViz = int(arcpy.GetCount_management(outputVizFC).getOutput(0)) 
+        print "Output FeatureClass: " + str(outputVizFC)
         print "Output Feature Count: " +  str(outputFeatureCountViz)
-                
-        if (outputFeatureCountFans < 1) or (outputFeatureCountViz < 1):
-            print "Invalid Output Feature Count: " +  str(outputFeatureCountFans) + ":" + str(outputFeatureCountViz) 
+                 
+        if (outputFeatureCountViz < 1) :
+            print "Invalid Output Feature Count: " + str(outputFeatureCountViz)
             raise Exception("Test Failed")
             
         # WORKAROUND: delete scratch db
