@@ -8,6 +8,7 @@ data/geodatabases/
 data/layers/
 maps/
 scratch/
+arc.dir
 *.pyt.xml
 
 # General

@@ -42,7 +42,7 @@ def RunTest():
         
         # Set environment settings
         print "Running from: " + str(TestUtilities.currentPath)
-        print "Geodatbase path: " + str(TestUtilities.geodatabasePath)
+        print "Geodatabase path: " + str(TestUtilities.geodatabasePath)
         
         arcpy.env.overwriteOutput = True
         arcpy.env.scratchWorkspace = TestUtilities.scratchGDB

@@ -2,7 +2,7 @@
 
 The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts, and tools for use in ArcGIS Desktop. These tools provide specialized processing and workflows for defense and intelligence analysis.
 
-![Image of Defense and Intel Analysis Toolbox](ScreenShot.jpg "defense-and-intel-analysis-toolbox")
+![Image of Defense and Intel Analysis Toolbox](ScreenShot.jpg)
 
 ## Features
 
@@ -40,10 +40,10 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 * ArcGIS Desktop 10.1 Standard 
 * Apache Ant - used to download and extract dependent data and run test drivers
 * Java Runtime Environment (JRE) or Developer Kit (JDK)
-* Some tools require additional licenses (they will be disabled if not available):
-* ArcGIS Desktop Advanced 
-* ArcGIS Spatial Analyst Extension
-* ArcGIS 3D Analyst Extension
+* Some tools require additional licenses (these tools will be disabled if license is unavailable):
+    * ArcGIS Desktop Advanced
+    * ArcGIS Spatial Analyst Extension
+    * ArcGIS 3D Analyst Extension
 
 ## Resources
 

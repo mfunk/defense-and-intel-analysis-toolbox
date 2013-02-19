@@ -12,7 +12,7 @@
   <property name="pythonpath" value="${dir.arcpy}\DLLs;${dir.arcpy}\lib;${dir.arcpy}\lib\plat-win;${dir.arcpy}\lib\lib-tk;${dir.arcpy};${dir.arcpy}\lib\site-packages;${dir.arcgisdesktop}\bin;${dir.arcgisdesktop}\arcpy"/>
 
   <target name="run_all_tests" 
-    depends="get_data,test_config,test_range_rings,test_range_fan,test_radial_line_of_sight">
+    depends="get_data,test_config,test_range_rings,test_range_fan,test_radial_line_of_sight,test_local_peaks,test_highest_point,test_lowest_point">
     <echo message="All Tests Complete" />
   </target>
 
@@ -56,4 +56,27 @@
     </exec>
   </target>
 
+  <target name="test_lowest_point">
+    <exec executable="${dir.arcpy}/python.exe" failonerror="true">
+      <env key="PYTHONPATH" path="${pythonpath}"/>
+      <arg line="-u"/>
+      <arg line="${dir.src}/TestModelLowestPoint.py"/>
+    </exec>
+  </target>
+
+  <target name="test_highest_point">
+    <exec executable="${dir.arcpy}/python.exe" failonerror="true">
+      <env key="PYTHONPATH" path="${pythonpath}"/>
+      <arg line="-u"/>
+      <arg line="${dir.src}/TestModelHighestPoint.py"/>
+    </exec>
+  </target>
+
+  <target name="test_local_peaks">
+    <exec executable="${dir.arcpy}/python.exe" failonerror="true">
+      <env key="PYTHONPATH" path="${pythonpath}"/>
+      <arg line="-u"/>
+      <arg line="${dir.src}/TestModelLocalPeaks.py"/>
+    </exec>
+  </target>
 </project>
