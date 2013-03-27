@@ -11,7 +11,7 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 * Tools for analyzing the battlefield environment
 * Tools for position analysis
 
-## Instructions
+## <a id="Instructions"></a>Instructions
 
 ### General Help
 [New to Github? Get started here.](http://htmlpreview.github.com/?https://github.com/Esri/esri.github.com/blob/master/help/esri-getting-to-know-github.html)
