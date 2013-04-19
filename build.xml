@@ -10,14 +10,16 @@
   <!-- templatehome = defense-and-intel-analysis-toolbox -->
 
   <property name="dir.datadir" value="./" />
+  <property name="dir.mxddatadir" value="./maps/" />
 
-  <target name="config" depends="get_data">
+  <target name="config" depends="make_dirs,get_data">
     <echo message="Gets All Dependent Data used by this template from ArcGIS Online" />
   </target>
 
   <!-- Create necessary folder structure (Github will not create empty folders) -->
   <target name="make_dirs">
-    <echo message="No need to makedirs, unzip makes entire data folder" />
+    <mkdir dir="${dir.mxddatadir}"/>
+    <echo message="Creating: ${dir.mxddatadir}" />
   </target>
 
   <!-- Get All Dependent Data from ArcGIS Online -->
@@ -29,7 +31,7 @@
       usetimestamp="true"/>
 
     <!-- Maps Folder -->
-    <get usetimestamp="true" verbose="true" 				dest="${dir.mxddatadir}/VisibilityAndRangeEx.mxd" 			src="http://www.arcgis.com/sharing/content/items/864f616764f3476ca2666c3d6fafe5ee/data"/>
+    <get usetimestamp="true" verbose="true" 					dest="${dir.mxddatadir}/VisibilityAndRangeEx.mxd" 				src="http://www.arcgis.com/sharing/content/items/864f616764f3476ca2666c3d6fafe5ee/data"/>
     <get usetimestamp="true" verbose="true" 
 	dest="${dir.mxddatadir}/VisibilityAndRange3DEx.3dd" 
 	src="http://www.arcgis.com/sharing/content/items/f3b54edc9470493c968171cd7c23c44b/data"/>

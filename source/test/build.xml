@@ -17,7 +17,7 @@
 
   <target name="test_viz_and_range">
     <echo message="Running: test_viz_and_range" />
-    <ant antfile="build.xml" dir="test_viz_and_range" target="run_all_tests" />
+    <ant dir="./test_viz_and_range" target="run_all_tests" />
     <echo message="Done Test" />
   </target>
 
