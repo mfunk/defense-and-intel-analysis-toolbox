@@ -4,12 +4,14 @@
 
 # Defense Template specific ignores
 application/
-data/geodatabases/
-data/layers/
+data/
 maps/
 scratch/
 arc.dir
 *.pyt.xml
+*.zip
+*-old
+*-old.*
 
 # General
 .metadata
@@ -22,6 +24,9 @@ dist/
 *~.nib
 
 # Eclipse
+# TODO: remove Eclipse project files
+#*.project
+#*.pyproject
 local.properties
 .classpath
 .settings/

@@ -24,6 +24,8 @@ try:
     
     # Get SR of Input Centers
     inputCentersSR = arcpy.Describe(input_centers).spatialReference
+    if inputCentersSR == "" or inputCentersSR == None :
+        inputCentersSR = GCS_WGS_1984    
     
     result = arcpy.GetCount_management(input_centers)
     arcpy.AddMessage("Using " + str(result) + " centers ...")

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- 
+ Build.xml
+ Description: Ant script used to fetch and unzip dependent data from ArcGIS Online
+ Requirements: Internet connectivity, Java JRE, Ant
+ -->
+
+<project name="DataDownloadAndConfiguration" basedir="." default="config">
+
+  <!-- templatehome = defense-and-intel-analysis-toolbox -->
+
+  <property name="dir.datadir" value="./" />
+
+  <target name="config" depends="get_data">
+    <echo message="Gets All Dependent Data used by this template from ArcGIS Online" />
+  </target>
+
+  <!-- Create necessary folder structure (Github will not create empty folders) -->
+  <target name="make_dirs">
+    <echo message="No need to makedirs, unzip makes entire data folder" />
+  </target>
+
+  <!-- Get All Dependent Data from ArcGIS Online -->
+  <target name="get_data">
+    <!-- Data Folder -->
+    <get src="http://www.arcgis.com/sharing/content/items/b818862d16b0425a85e66747874f3a16/data"
+      dest="${dir.datadir}/defense-and-intel-analysis-toolbox-data.zip" 
+      verbose="true"
+      usetimestamp="true"/>
+
+    <!-- Maps Folder -->
+    <get usetimestamp="true" verbose="true" 				dest="${dir.mxddatadir}/VisibilityAndRangeEx.mxd" 			src="http://www.arcgis.com/sharing/content/items/864f616764f3476ca2666c3d6fafe5ee/data"/>
+    <get usetimestamp="true" verbose="true" 
+	dest="${dir.mxddatadir}/VisibilityAndRange3DEx.3dd" 
+	src="http://www.arcgis.com/sharing/content/items/f3b54edc9470493c968171cd7c23c44b/data"/>
+
+    <!-- Unzip Data Directory -->
+    <unzip src="${dir.datadir}/defense-and-intel-analysis-toolbox-data.zip"
+         dest="${dir.datadir}">
+    </unzip>
+
+  </target>
+
+  <!-- Delete All Data Folders and Datasets -->
+  <!-- Normally only for testing from a clean configuration -->
+  <target name="clean">
+    <delete dir="${dir.datadir}/data" />
+    <delete dir="${dir.datadir}/maps" />
+    <echo message="Warning: deleting data dirs (only do this if you mean it)" />
+    <echo message="Deleting path: ${dir.datadir}/data" />
+    <echo message="Deleting path: ${dir.datadir}/maps" />
+  </target>
+
+  <target name="test">
+    <echo message="Test" />
+  </target>
+
+</project>
