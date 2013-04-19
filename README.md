@@ -26,14 +26,15 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
     * You may optionally install the [PyDev Eclipse Plugin for Python](http://pydev.org) if you plan to use Eclipse to run/debug
 * To download the data dependencies 
     * Open Command Prompt>
-    * cd defense-and-intel-analysis-toolbox\data
+    * cd defense-and-intel-analysis-toolbox
     * > ant
     * Verify “Build Succeeded”  
 * To run unit tests
     * Open Command Prompt>
     * > cd defense-and-intel-analysis-toolbox\source\test
     * > ant
-    * Verify “Build Succeeded”  
+    * Verify “Build Succeeded”
+    * Note: this will run the test drivers from each test subdirectory (test_position_analysis, test_viz_and_range, etc.)
 
 ## <a id="Requirements"></a>Requirements
 
