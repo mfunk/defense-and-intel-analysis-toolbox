@@ -211,11 +211,8 @@ try:
     RunTestTableToPoints()
     RunTestTableToPolyline()
     RunTestTableToEllipse()
-    
-    try : 
-        RunTestTableToLOB()
-    except :
-        print "This one doesn't work & is a know issue"
+    RunTestTableToLOB()
+   
     
     ################################################
     
