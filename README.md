@@ -1,5 +1,5 @@
 # defense-and-intel-analysis-toolbox
-#this is a test
+
 The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts, and tools for use in ArcGIS Desktop. These tools provide specialized processing and workflows for defense and intelligence analysis.
 
 ![Image of Defense and Intel Analysis Toolbox](ScreenShot.jpg)
