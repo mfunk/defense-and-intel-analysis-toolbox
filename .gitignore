@@ -12,6 +12,8 @@ arc.dir
 *.zip
 *-old
 *-old.*
+*-sav
+*-sav.*
 
 # General
 .metadata
