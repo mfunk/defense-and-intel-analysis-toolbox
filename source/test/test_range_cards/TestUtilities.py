@@ -12,28 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #------------------------------------------------------------------------------
-# TestUtilities.py
+# TestTemplateConfig.py
 # Description: Common objects/methods used by test scripts
 # Requirements: ArcGIS Desktop Standard
-# ----------------------------------------------------------------------------
+#------------------------------------------------------------------------------
 
 import arcpy
 import os
 
 currentPath = os.path.dirname(__file__)
 geodatabasePath = os.path.normpath(os.path.join(currentPath, r"../../../data/geodatabases/"))
-csvPath = os.path.normpath(os.path.join(currentPath, r"../../../data/csv/"))
-dbfPath = os.path.normpath(os.path.join(currentPath, r"../../../data/dbf/"))
 
 scratchPath = geodatabasePath
 toolboxesPath = os.path.normpath(os.path.join(currentPath, r"../../../toolboxes/"))                
 
 inputGDB  = os.path.join(geodatabasePath, "test_inputs.gdb")
 outputGDB = os.path.join(geodatabasePath, "test_outputs.gdb")
-defaultGDB = os.path.join(geodatabasePath, "default.gdb")
+defaultGDB = os.path.join(geodatabasePath, "RangeCard.gdb")
 scratchGDB = os.path.join(scratchPath, "scratch.gdb")
 
-toolbox = os.path.join(toolboxesPath, "Position Analysis Tools.tbx")
+toolbox = os.path.join(toolboxesPath, "Range Card Tools.tbx")
 
 def createScratch() :
     try :

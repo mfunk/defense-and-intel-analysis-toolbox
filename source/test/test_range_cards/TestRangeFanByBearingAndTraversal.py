@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #------------------------------------------------------------------------------
-# Name: TestModelRangeRings.py
+# Name: TestRangeFanByBearingAndTraversal.py
 # Description: Automatic Test of Range Rings Model
 # Requirements: ArcGIS Desktop Standard
 #------------------------------------------------------------------------------
@@ -26,35 +26,23 @@ import TestUtilities
 
 def RunTest():
     try:
-        arcpy.AddMessage("Starting Test: RangeRings")
+        arcpy.AddMessage("Starting Test: TestRangeFanByBearingAndTraversal")
         
         # WORKAROUND
         print "Creating New Scratch Workspace (Workaround)"    
         TestUtilities.createScratch()
             
-        # Verify the expected configuration exists
         inputPointsFC =  os.path.join(TestUtilities.inputGDB, "sampleRangePoints")
-        outputRangeRingsFC =  os.path.join(TestUtilities.outputGDB, "RangeRings")
-        outputRangeRadialsFC =  os.path.join(TestUtilities.outputGDB, "RangeRadials") 
+        outputRangeFansFC =  os.path.join(TestUtilities.outputGDB, "RangeFansBearingAndTraversal")
         toolbox = TestUtilities.toolbox
-        
-        # Check For Valid Input
-        objects2Check = []
-        objects2Check.extend([inputPointsFC, toolbox])
-        for object2Check in objects2Check :
-            desc = arcpy.Describe(object2Check)
-            if desc == None :
-                raise Exception("Bad Input")
-            else :
-                print "Valid Object: " + desc.Name 
-        
+                
         # Set environment settings
         print "Running from: " + str(TestUtilities.currentPath)
         print "Geodatabase path: " + str(TestUtilities.geodatabasePath)
         
         arcpy.env.overwriteOutput = True
         arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "VandRAlias")
+        arcpy.ImportToolbox(toolbox, "RFT")
     
         inputFeatureCount = int(arcpy.GetCount_management(inputPointsFC).getOutput(0)) 
         print "Input FeatureClass: " + str(inputPointsFC)
@@ -63,27 +51,22 @@ def RunTest():
         if (inputFeatureCount < 1) :
             print "Invalid Input Feature Count: " +  str(inputFeatureCount)
                        
-        numberOfRings = 5
-        ringInterval = 1000.0
-        distanceUnits = "METERS"
-        numberOfRadials = 8
-           
+        maximumRangeInMeters = 2000
+        centralBearingInDegrees = 320
+        traversalWidthInDegrees = 30
+                   
         ########################################################3
         # Execute the Model under test:   
-        arcpy.RangeRings_VandRAlias(inputPointsFC, numberOfRings, ringInterval, distanceUnits, numberOfRadials, outputRangeRingsFC, outputRangeRadialsFC)
+        arcpy.RangeFanByBearingAndTraversal_RFT(inputPointsFC, maximumRangeInMeters, centralBearingInDegrees, traversalWidthInDegrees, outputRangeFansFC)
         ########################################################3
     
         # Verify the results    
-        outputFeatureCountRings = int(arcpy.GetCount_management(outputRangeRingsFC).getOutput(0)) 
-        print "Output FeatureClass: " + str(outputRangeRingsFC)
-        print "Output Feature Count: " +  str(outputFeatureCountRings)
-    
-        outputFeatureCountRadials = int(arcpy.GetCount_management(outputRangeRadialsFC).getOutput(0))
-        print "Output FeatureClass: " + str(outputRangeRadialsFC)
-        print "Output Feature Count: " +  str(outputFeatureCountRadials)
+        outputFeatureCount = int(arcpy.GetCount_management(outputRangeFansFC).getOutput(0)) 
+        print "Output FeatureClass: " + str(outputRangeFansFC)
+        print "Output Feature Count: " +  str(outputFeatureCount)
                 
-        if (outputFeatureCountRings < 1) or (outputFeatureCountRadials < 1) :
-            print "Invalid Output Feature Count: " +  str(outputFeatureCountRings) + ":" + str(outputFeatureCountRadials)
+        if (outputFeatureCount < 1) :
+            print "Invalid Output Feature Count: " +  str(outputFeatureCount)
             raise Exception("Test Failed")            
             
         # WORKAROUND: delete scratch db

@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #------------------------------------------------------------------------------
-# TemplateConfigTest.py
+# TestTemplateConfig.py
 # Description: Common objects/methods used by test scripts
 # Requirements: ArcGIS Desktop Standard
-# ----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 import arcpy
 import os
@@ -37,7 +37,8 @@ try:
     print "Running from: " + str(TestUtilities.currentPath)
            
     paths2Check = []
-    paths2Check.extend([TestUtilities.geodatabasePath, TestUtilities.scratchPath, TestUtilities.toolboxesPath])
+    paths2Check.extend([TestUtilities.geodatabasePath, TestUtilities.scratchPath, \
+                        TestUtilities.toolboxesPath])
     
     for path2check in paths2Check :
         if os.path.exists(path2check) :
@@ -53,7 +54,8 @@ try:
     print "Testing Necessary Geo Objects"        
     
     objects2Check = []
-    objects2Check.extend([TestUtilities.toolbox, TestUtilities.inputGDB, TestUtilities.outputGDB, TestUtilities.defaultGDB]) 
+    objects2Check.extend([TestUtilities.toolbox, TestUtilities.inputGDB, TestUtilities.outputGDB, \
+                         TestUtilities.defaultGDB]) 
     for object2Check in objects2Check :
         desc = arcpy.Describe(object2Check)
         if desc == None :
