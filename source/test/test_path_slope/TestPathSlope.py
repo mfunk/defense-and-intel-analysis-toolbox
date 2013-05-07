@@ -58,6 +58,7 @@ try:
     
     #Testing Path Slope by Reclass Values
     arcpy.AddMessage("Starting Test: Path Slope by Reclass Values")
+    TestUtilities.createScratch()
     arcpy.PathSlopeByRanges_path(inputPolyArea, inputRoads, inputSurface, 'DEGREE', '0 3 1;3 10 2;10 15 3;15 20 4;20 30 5;30 45 6;45 60 7;60 85 8;85 10000000000000 9;NODATA 0', psOutputRV)
     
     outputType = [psOutput, psOutputCT, psOutputRV]
