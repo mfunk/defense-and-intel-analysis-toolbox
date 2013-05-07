@@ -12,7 +12,7 @@
   <property name="pythonpath" value="${dir.arcpy}\DLLs;${dir.arcpy}\lib;${dir.arcpy}\lib\plat-win;${dir.arcpy}\lib\lib-tk;${dir.arcpy};${dir.arcpy}\lib\site-packages;${dir.arcgisdesktop}\bin;${dir.arcgisdesktop}\arcpy"/>
 
   <target name="run_all_tests" 
-    depends="test_config,test_path_slope">
+    depends="test_config,test_path_slope,test_path_slope_custom_table,test_path_slope_reclass_values">
     <echo message="All Tests Complete" />
   </target>
 
@@ -31,5 +31,21 @@
       <arg line="${dir.src}/TestPathSlope.py"/>
     </exec>
   </target>
+  
+    <target name="test_path_slope_custom_table">
+    <exec executable="${dir.arcpy}/python.exe" failonerror="true">
+      <env key="PYTHONPATH" path="${pythonpath}"/>
+      <arg line="-u"/>
+      <arg line="${dir.src}/TestPathSlopeCustomTable.py"/>
+    </exec>
+	</target>
+	
+	<target name="test_path_slope_reclass_values">
+    <exec executable="${dir.arcpy}/python.exe" failonerror="true">
+      <env key="PYTHONPATH" path="${pythonpath}"/>
+      <arg line="-u"/>
+      <arg line="${dir.src}/TestPathSlopeReclassValues.py"/>
+    </exec>
+	</target>
 
 </project>

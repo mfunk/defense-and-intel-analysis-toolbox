@@ -35,19 +35,23 @@ try:
     
     arcpy.ImportToolbox(TestUtilities.toolbox)
     arcpy.env.overwriteOutput = True
+    arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
     
     inputPolyArea = os.path.join(TestUtilities.inputGDB, "samplePolygonArea")
     inputRoads = os.path.join(TestUtilities.defaultGDB, "roads")
     inputSurface = os.path.join(TestUtilities.defaultGDB, "Jbad_SRTM_USGS_EROS")
-    psOutput = os.path.join(TestUtilities.outputGDB, "PathSlopeOutput")
+    psOutputRV = os.path.join(TestUtilities.outputGDB, "PathSlopeOutputRV")
+    classValue = '0 3 1;3 10 2;10 15 3;15 20 4;20 30 5;30 45 6;45 60 7;60 85 8;85 10000000000000 9;NODATA 0'
     
-    #Testing Path Slope
-    arcpy.AddMessage("Starting Test: Path Slope Tools")
-    arcpy.PathSlope_path(inputPolyArea,inputRoads, inputSurface, psOutput)
+    #Testing Path Slope by Reclass Values
+    arcpy.AddMessage("Starting Test: Path Slope by Reclass Values")
+    TestUtilities.createScratch()
+    arcpy.PathSlopeByRanges_path(inputPolyArea, inputRoads, inputSurface, 'DEGREE', classValue, psOutputRV)
+
     
-    #Verify Results
-    outputFeatureCount = int(arcpy.GetCount_management(psOutput).getOutput(0)) 
-    print "Output FeatureClass: " + str(psOutput)
+    #Test for Feature Outpu
+    outputFeatureCount = int(arcpy.GetCount_management(psOutputRV).getOutput(0)) 
+    print "Output FeatureClass: " + str(psOutputRV)
     print "Output Feature Count: " +  str(outputFeatureCount)
             
     if (outputFeatureCount < 1):

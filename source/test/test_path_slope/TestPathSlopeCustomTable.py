@@ -37,17 +37,19 @@ try:
     arcpy.env.overwriteOutput = True
     
     inputPolyArea = os.path.join(TestUtilities.inputGDB, "samplePolygonArea")
+    inputSRT = os.path.join(TestUtilities.defaultGDB, "SlopeRangeTableExample")
     inputRoads = os.path.join(TestUtilities.defaultGDB, "roads")
     inputSurface = os.path.join(TestUtilities.defaultGDB, "Jbad_SRTM_USGS_EROS")
-    psOutput = os.path.join(TestUtilities.outputGDB, "PathSlopeOutput")
+    psOutputCT = os.path.join(TestUtilities.outputGDB, "PathSlopeOutputCT")
     
-    #Testing Path Slope
-    arcpy.AddMessage("Starting Test: Path Slope Tools")
-    arcpy.PathSlope_path(inputPolyArea,inputRoads, inputSurface, psOutput)
-    
-    #Verify Results
-    outputFeatureCount = int(arcpy.GetCount_management(psOutput).getOutput(0)) 
-    print "Output FeatureClass: " + str(psOutput)
+    #Testing Path Slope by Custom Table
+    arcpy.AddMessage("Starting Test: Path Slope by Custom Table")
+    arcpy.PathSlopeByCustomTable_path(inputPolyArea, inputRoads, inputSurface, inputSRT, 'FromVal', 'ToVal', 'SlopeCat', psOutputCT, 'PERCENT_RISE')
+
+# Verify Results
+
+    outputFeatureCount = int(arcpy.GetCount_management(psOutputCT).getOutput(0)) 
+    print "Output FeatureClass: " + str(psOutputCT)
     print "Output Feature Count: " +  str(outputFeatureCount)
             
     if (outputFeatureCount < 1):
