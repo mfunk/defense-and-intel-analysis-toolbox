@@ -26,5 +26,11 @@
     <ant dir="./test_viz_and_range" target="run_all_tests" />
     <echo message="Done Test: test_viz_and_range" />
   </target>
+  
+  <target name="test_path_slope">
+    <echo message="Running: test_path_slope" />
+    <ant dir="./test_path_slope" target="run_all_tests" />
+    <echo message="Done Test: test_path_slope" />
+  </target>
 
 </project>
