@@ -14,7 +14,7 @@
 #------------------------------------------------------------------------------
 # TestPathSlope.py
 # Description: Test Path Slope Toolbox
-# Requirements: ArcGIS Desktop Standard
+# Requirements: ArcGIS Desktop Standard with Spatial Analyst Extension
 # ----------------------------------------------------------------------------
 
 import arcpy

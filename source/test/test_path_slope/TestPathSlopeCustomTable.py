@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #------------------------------------------------------------------------------
-# TestPathSlope.py
+# TestPathSlopeCustomTable.py
 # Description: Test Path Slope Toolbox
-# Requirements: ArcGIS Desktop Standard
+# Requirements: ArcGIS Desktop Standard with Spatial Analyst Extension
 # ----------------------------------------------------------------------------
 
 import arcpy
