@@ -11,18 +11,34 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 * Tools for analyzing the battlefield environment
 * Tools for position analysis
 
+## <a id="Requirements"></a>Requirements
+
+* ArcGIS Desktop 10.1 Standard 
+* Apache Ant - used to download and extract dependent data and run test drivers
+* Java Runtime Environment (JRE) or Developer Kit (JDK)
+* Some tools require additional licenses (these tools will be disabled if license is unavailable):
+    * ArcGIS Desktop Advanced (ArcInfo)
+    * ArcGIS Spatial Analyst Extension
+    * ArcGIS 3D Analyst Extension
+    * For example these tools require Desktop Advanced and Spatial Analyst:
+        * Path Slope Tools.tbx\Path Slope
+        * Visibility and Range Tools.tbx\Range Fan
+
 ## <a id="Instructions"></a>Instructions
 
 ### General Help
 [New to Github? Get started here.](http://htmlpreview.github.com/?https://github.com/Esri/esri.github.com/blob/master/help/esri-getting-to-know-github.html)
 
 ### Getting Started with the toolbox
+* Download the Github repository
+    * If repository was downloaded as a zip, extract the zip file
+    * Make note of this directory, the steps below assume it will be called "defense-and-intel-analysis-toolbox"
 * Install and configure Apache Ant
     * Download Ant from the [Apache Ant Project](http://ant.apache.org/bindownload.cgi) and unzip to a location on your machine
     * Set environment variable `ANT_HOME` to Ant Install Location
     * Add Ant\bin to your path: `%ANT_HOME%\bin`
     * NOTE: Ant requires Java [Runtime Environment (JRE) or Developer Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/index.html) to be installed and the environment variable `JAVA_HOME` to be set to this location
-    * To verify your Ant Installation: Open Command Prompt> `ant -v` and verify it runs and returns the version correctly 
+    * To verify your Ant Installation: Open Command Prompt> `ant -h` and verify it runs and returns the help options correctly 
     * You may optionally install the [PyDev Eclipse Plugin for Python](http://pydev.org) if you plan to use Eclipse to run/debug
 * To download the data dependencies 
     * Open Command Prompt>
@@ -36,15 +52,6 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
     * Verify “Build Succeeded”
     * Note: this will run the test drivers from each test subdirectory (test_position_analysis, test_viz_and_range, etc.)
 
-## <a id="Requirements"></a>Requirements
-
-* ArcGIS Desktop 10.1 Standard 
-* Apache Ant - used to download and extract dependent data and run test drivers
-* Java Runtime Environment (JRE) or Developer Kit (JDK)
-* Some tools require additional licenses (these tools will be disabled if license is unavailable):
-    * ArcGIS Desktop Advanced
-    * ArcGIS Spatial Analyst Extension
-    * ArcGIS 3D Analyst Extension
 
 ## Resources
 
