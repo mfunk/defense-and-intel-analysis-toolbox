@@ -1,22 +1,26 @@
 <?xml version="1.0"?>
 
 <project name="DefenseAndIntelAnalysisToolboxTest" basedir="." default="run_all_tests">
-
+<import file="../versions.xml"/>
   <!-- templatehome = defense-and-intel-analysis-toolbox -->
+  
+<target name="set_all_variables" depends="SET_CUSTOM_AGS_LOCATION,setvariables101,setvariables102">
+<echo message="SETTING ALL VARIABLES"/>
+<echo message="${dir.arcpy}, ${dir.arcgisdesktop}" />
+</target>
 
-  <property name="dir.arcpy" value="C:\Python27\ArcGIS10.1"/>
-  <property name="dir.arcgisdesktop" value="C:\Program Files (x86)\ArcGIS\Desktop10.1"/>
+  
   <property name="dir.src" value="."/>
   <property name="dir.datadir" value="../../.."/>
 
   <property name="pythonpath" value="${dir.arcpy}\DLLs;${dir.arcpy}\lib;${dir.arcpy}\lib\plat-win;${dir.arcpy}\lib\lib-tk;${dir.arcpy};${dir.arcpy}\lib\site-packages;${dir.arcgisdesktop}\bin;${dir.arcgisdesktop}\arcpy"/>
 
   <target name="run_all_tests" 
-    depends="test_config,test_path_slope,test_path_slope_custom_table,test_path_slope_reclass_values">
+    depends="set_all_variables,test_config,test_path_slope,test_path_slope_custom_table,test_path_slope_reclass_values">
     <echo message="All Tests Complete" />
   </target>
 
-  <target name="test_config">
+  <target name="test_config" depends="set_all_variables">
     <exec executable="${dir.arcpy}/python.exe" failonerror="true">
       <env key="PYTHONPATH" path="${pythonpath}"/>
       <arg line="-u"/>
@@ -24,7 +28,7 @@
     </exec>
   </target>
   
-  <target name="test_path_slope">
+  <target name="test_path_slope" depends="set_all_variables">
     <exec executable="${dir.arcpy}/python.exe" failonerror="true">
       <env key="PYTHONPATH" path="${pythonpath}"/>
       <arg line="-u"/>
@@ -32,7 +36,7 @@
     </exec>
   </target>
   
-    <target name="test_path_slope_custom_table">
+    <target name="test_path_slope_custom_table" depends="set_all_variables">
     <exec executable="${dir.arcpy}/python.exe" failonerror="true">
       <env key="PYTHONPATH" path="${pythonpath}"/>
       <arg line="-u"/>
@@ -40,7 +44,7 @@
     </exec>
 	</target>
 	
-	<target name="test_path_slope_reclass_values">
+	<target name="test_path_slope_reclass_values" depends="set_all_variables">
     <exec executable="${dir.arcpy}/python.exe" failonerror="true">
       <env key="PYTHONPATH" path="${pythonpath}"/>
       <arg line="-u"/>

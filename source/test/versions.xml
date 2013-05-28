@@ -1,0 +1,54 @@
+<project name="ArcGIS Versions" default="set_all_variables" basedir=".">
+    <description>
+        Sets correct ArcGIS Folder location depending on version detected.
+    </description>
+	
+<!-- *************************************************************************************************************************** -->
+<!-- If you want to use a custom AGS Location Uncomment the line below and set the values in the SET_CUSTOM_AGS_LOCATION target. -->
+<!-- <property name="USE_CUSTOM_AGS_LOCATION" value="true"/> -->
+<target name="SET_CUSTOM_AGS_LOCATION" if="USE_CUSTOM_AGS_LOCATION">
+<echo message="Setting Custom Values for ArcGIS Desktop and Python"/>
+  <property name="dir.arcpy" value="C:\Python27\ArcGIS10.xxx"/> <!-- CHANGE TO YOUR LOCATION -->
+  <property name="dir.arcgisdesktop" value="C:\Program Files (x86)\ArcGIS\Desktop10.xxx"/> <!-- CHANGE TO YOUR LOCATION -->
+</target>
+<!-- *************************************************************************************************************************** -->
+
+<property name="dir101" value="C:\Program Files (x86)\ArcGIS\Desktop10.1"/>
+<property name="dir102" value="C:\Program Files (x86)\ArcGIS\Desktop10.2"/>
+
+<target name="checkdir101">
+  <condition property="Present101">
+    <available file="${dir101}" type="dir"/>
+  </condition>
+ </target>
+
+<target name="checkdir102">
+  <condition property="Present102">
+    <available file="${dir102}" type="dir"/>
+  </condition>
+ </target>
+ 
+<target name="setvariables101" depends="checkdir101" if="Present101">
+<echo message="ArcGIS Desktop 10.1 detected."/>
+<property name="dir.arcpy" value="C:\Python27\ArcGIS10.1"/>
+<property name="dir.arcgisdesktop" value="C:\Program Files (x86)\ArcGIS\Desktop10.1"/>
+</target>
+
+<target name="setvariables102" depends="checkdir102" if="Present102">
+<echo message="ArcGIS Desktop 10.2 detected."/>
+  <property name="dir.arcpy" value="C:\Python27\ArcGIS10.2"/>
+  <property name="dir.arcgisdesktop" value="C:\Program Files (x86)\ArcGIS\Desktop10.2"/>
+</target>
+
+
+
+
+<!--<target name="set_all_variables" depends="SET_CUSTOM_AGS_LOCATION,setvariables101,setvariables102">
+<echo message="SETTING ALL VARIABLES"/>
+<echo message="${dir.arcpy}, ${dir.arcgisdesktop}" />
+</target>-->
+
+  </project>
+
+
+
