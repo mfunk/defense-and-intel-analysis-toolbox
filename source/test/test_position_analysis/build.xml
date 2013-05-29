@@ -5,11 +5,6 @@
   <!-- templatehome = defense-and-intel-analysis-toolbox -->
 <import file="../versions.xml"/>
 
-<target name="set_all_variables" depends="SET_CUSTOM_AGS_LOCATION,setvariables101,setvariables102">
-<echo message="SETTING ALL VARIABLES"/>
-<echo message="${dir.arcpy}, ${dir.arcgisdesktop}" />
-
-</target>
   <property name="dir.src" value="."/>
   <property name="dir.datadir" value="../../.."/>
 
