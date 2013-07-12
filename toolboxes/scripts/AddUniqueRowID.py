@@ -13,7 +13,7 @@
 # limitations under the License.
 #------------------------------------------------------------------------------
 # AddUniqueRowID.py
-# Description: Common objects/methods used by test scripts
+# Description: Create Unique Id
 # Requirements: ArcGIS Desktop Standard
 # -----------------------------------------------------------------------------
 

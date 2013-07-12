@@ -60,7 +60,7 @@ def RunTest():
         
         arcpy.env.overwriteOutput = True
         arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "VandRAlias")
+        arcpy.ImportToolbox(toolbox, "VandR")
     
         inputFeatureCount = int(arcpy.GetCount_management(inputPolygonFC).getOutput(0)) 
         print "Input FeatureClass: " + str(inputPolygonFC)
@@ -73,7 +73,7 @@ def RunTest():
            
         ########################################################3
         # Execute the Model under test:   
-        arcpy.FindLocalPeaks_VandRAlias(inputPolygonFC, numberOfPeaks, inputSurface, outputPointsFC)
+        arcpy.FindLocalPeaks_VandR(inputPolygonFC, numberOfPeaks, inputSurface, outputPointsFC)
         ########################################################3
     
         # Verify the results    

@@ -60,7 +60,7 @@ def RunTest():
         
         arcpy.env.overwriteOutput = True
         arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "VandRAlias")
+        arcpy.ImportToolbox(toolbox, "VandR")
     
         inputFeatureCount = int(arcpy.GetCount_management(inputPolygonFC).getOutput(0)) 
         print "Input FeatureClass: " + str(inputPolygonFC)
@@ -71,7 +71,7 @@ def RunTest():
            
         ########################################################3
         # Execute the Model under test:   
-        arcpy.LowestPoint_VandRAlias(inputPolygonFC, inputSurface, outputPointsFC)
+        arcpy.LowestPoint_VandR(inputPolygonFC, inputSurface, outputPointsFC)
         ########################################################3
     
         # Verify the results    

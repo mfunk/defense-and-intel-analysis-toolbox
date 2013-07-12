@@ -26,7 +26,19 @@ import TestUtilities
 
 def RunTest():
     try:
-        arcpy.AddMessage("Starting Test: LocalPeaks")
+        arcpy.AddMessage("Starting Test: TestLocalPeaks")
+        
+        TEST_IMPLEMENTED = False
+        
+        if not TEST_IMPLEMENTED :
+            arcpy.AddWarning("***Test Not Yet Implemented***")
+            return
+        
+        # TODO: once model has a version that works with local surface data 
+        # (rather than image service), then finish this test/implementation below
+        #
+        # alternately you can add an image service connection in Catalog and 
+        # fill in the parameter below
         
         if arcpy.CheckExtension("Spatial") == "Available":
             arcpy.CheckOutExtension("Spatial")

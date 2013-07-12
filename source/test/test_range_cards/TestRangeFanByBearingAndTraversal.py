@@ -42,7 +42,7 @@ def RunTest():
         
         arcpy.env.overwriteOutput = True
         arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "RFT")
+        arcpy.ImportToolbox(toolbox, "Range")
     
         inputFeatureCount = int(arcpy.GetCount_management(inputPointsFC).getOutput(0)) 
         print "Input FeatureClass: " + str(inputPointsFC)
@@ -57,7 +57,7 @@ def RunTest():
                    
         ########################################################3
         # Execute the Model under test:   
-        arcpy.RangeFanByBearingAndTraversal_RFT(inputPointsFC, maximumRangeInMeters, centralBearingInDegrees, traversalWidthInDegrees, outputRangeFansFC)
+        arcpy.RangeFanByBearingAndTraversal_Range(inputPointsFC, maximumRangeInMeters, centralBearingInDegrees, traversalWidthInDegrees, outputRangeFansFC)
         ########################################################3
     
         # Verify the results    

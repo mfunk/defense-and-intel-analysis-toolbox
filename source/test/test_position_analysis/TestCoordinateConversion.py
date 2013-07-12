@@ -42,7 +42,7 @@ def RunTest():
         
         arcpy.env.overwriteOutput = True
         arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "MyAlias")
+        arcpy.ImportToolbox(toolbox, "Position")
     
         inputFeatureCount = int(arcpy.GetCount_management(inputTable).getOutput(0)) 
         print "Input FeatureClass: " + str(inputTable)
@@ -61,7 +61,7 @@ def RunTest():
         # sample params:
         # 'data\csv\SigActs.csv', 'MGRS', 'Location', '#', 'data\test_coordinate_cc.dbf', 
         
-        arcpy.ConvertCoordinates_MyAlias(inputTable, coordinateConversionFrom, coordinateFieldX, coordinateFieldY, outputDbf)
+        arcpy.ConvertCoordinates_Position(inputTable, coordinateConversionFrom, coordinateFieldX, coordinateFieldY, outputDbf)
         ########################################################3
     
         # Verify the results    
