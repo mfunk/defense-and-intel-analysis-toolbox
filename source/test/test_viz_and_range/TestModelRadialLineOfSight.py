@@ -60,7 +60,7 @@ def RunTest():
         
         arcpy.env.overwriteOutput = True
         arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "VandRAlias")
+        arcpy.ImportToolbox(toolbox, "VandR")
     
         inputFeatureCount = int(arcpy.GetCount_management(inputPointsFC).getOutput(0)) 
         print "Input FeatureClass: " + str(inputPointsFC)
@@ -73,7 +73,7 @@ def RunTest():
            
         ########################################################3
         # Execute the Model under test:   
-        arcpy.RadialLineOfSight_VandRAlias(inputPointsFC, inputSurface, outputVizFC, forceVisibilityToInfinity)
+        arcpy.RadialLineOfSight_VandR(inputPointsFC, inputSurface, outputVizFC, forceVisibilityToInfinity)
         ########################################################3
     
         # Verify the results    

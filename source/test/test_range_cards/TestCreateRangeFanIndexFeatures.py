@@ -43,7 +43,7 @@ def RunTest():
         
         arcpy.env.overwriteOutput = True
         arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "RFT")
+        arcpy.ImportToolbox(toolbox, "Range")
     
         inputFeatureCount = int(arcpy.GetCount_management(inputPolygonFC).getOutput(0)) 
         print "Input FeatureClass: " + str(inputPolygonFC)
@@ -54,7 +54,7 @@ def RunTest():
                    
         ########################################################3
         # Execute the Model under test:   
-        arcpy.CreateRangeFanIndexFeatures_RFT(inputPolygonFC, outputExtentBoxes, outputRangeVertices)
+        arcpy.CreateRangeFanIndexFeatures_Range(inputPolygonFC, outputExtentBoxes, outputRangeVertices)
         ########################################################3
     
         # Verify the results    

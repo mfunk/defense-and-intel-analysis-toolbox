@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #------------------------------------------------------------------------------
-# Name: TestModelHighestPoint.py
-# Description: Automatic Test of Highest Point Model
+# Name: TestModelLocalPeaks.py
+# Description: Automatic Test of Local Peaks Model
 # Requirements: ArcGIS Desktop Standard with Spatial Analyst Extension
 #------------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ import TestUtilities
 
 def RunTest():
     try:
-        arcpy.AddMessage("Starting Test: HighestPoint")
+        arcpy.AddMessage("Starting Test: RangeFan")
         
         if arcpy.CheckExtension("Spatial") == "Available":
             arcpy.CheckOutExtension("Spatial")
@@ -34,19 +34,23 @@ def RunTest():
             # Raise a custom exception
             raise Exception("LicenseError")        
         
+        arcpy.env.overwriteOutput = True
+        arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
+                
         # WORKAROUND
         print "Creating New Scratch Workspace (Workaround)"    
         TestUtilities.createScratch()
             
         # Verify the expected configuration exists
-        inputPolygonFC =  os.path.join(TestUtilities.inputGDB, "samplePolygonArea")
-        inputSurface =  os.path.join(TestUtilities.defaultGDB, "Jbad_SRTM_USGS_EROS")
-        outputPointsFC =  os.path.join(TestUtilities.outputGDB, "HighestPoint")
+        inputPointsFC =  os.path.join(TestUtilities.defaultGDB, "sampleRangePoints")
+        outputRangeFansFC = os.path.join(TestUtilities.outputGDB, "RangeFans")
         toolbox = TestUtilities.toolbox
-        
+                
+        arcpy.ImportToolbox(toolbox, "MAoT")
+                        
         # Check For Valid Input
         objects2Check = []
-        objects2Check.extend([inputPolygonFC, inputSurface, toolbox])
+        objects2Check.extend([inputPointsFC, toolbox])
         for object2Check in objects2Check :
             desc = arcpy.Describe(object2Check)
             if desc == None :
@@ -56,31 +60,31 @@ def RunTest():
         
         # Set environment settings
         print "Running from: " + str(TestUtilities.currentPath)
-        print "Geodatabase path: " + str(TestUtilities.geodatabasePath)
-        
-        arcpy.env.overwriteOutput = True
-        arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "VandR")
+        print "Geodatabase path: " + str(TestUtilities.geodatabasePath)    
     
-        inputFeatureCount = int(arcpy.GetCount_management(inputPolygonFC).getOutput(0)) 
-        print "Input FeatureClass: " + str(inputPolygonFC)
+        inputFeatureCount = int(arcpy.GetCount_management(inputPointsFC).getOutput(0)) 
+        print "Input FeatureClass: " + str(inputPointsFC)
         print "Input Feature Count: " +  str(inputFeatureCount)
             
         if (inputFeatureCount < 1) :
             print "Invalid Input Feature Count: " +  str(inputFeatureCount)                    
            
+        maximumRange = 1000.0
+        bearing = 150.0
+        traversal = 22.0
+        projection = "#"
+           
         ########################################################3
         # Execute the Model under test:   
-        arcpy.HighestPoint_VandR(inputPolygonFC, inputSurface, outputPointsFC)
+        arcpy.sourceRangeFan_MAoT(inputPointsFC, maximumRange, bearing, traversal, outputRangeFansFC)
         ########################################################3
     
-        # Verify the results    
-        outputFeatureCount = int(arcpy.GetCount_management(outputPointsFC).getOutput(0)) 
-        print "Output FeatureClass: " + str(outputPointsFC)
-        print "Output Feature Count: " +  str(outputFeatureCount)
-                
-        if (outputPointsFC < 1) :
-            print "Invalid Output Feature Count: " +  str(outputFeatureCount) 
+        outputFeatureCountFans = int(arcpy.GetCount_management(outputRangeFansFC).getOutput(0)) 
+        print "Output FeatureClass: " + str(outputRangeFansFC)
+        print "Output Feature Count: " +  str(outputFeatureCountFans)
+    
+        if (outputFeatureCountFans < 1) :
+            print "Invalid Output Feature Count: " +  str(outputFeatureCountFans) 
             raise Exception("Test Failed")
             
         # WORKAROUND: delete scratch db

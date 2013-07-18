@@ -43,6 +43,15 @@
 
   </target>
 
+  <target name="get_data_operations_only">
+    <get src="http://downloads.esri.com/resources/defense/Operational_Environment.zip"
+      dest="${dir.datadir}/Operational_Environment.zip" 
+      verbose="true"
+      usetimestamp="true"/>
+    <unzip src="${dir.datadir}/Operational_Environment.zip"
+         dest="${dir.datadir}/data/Operational_Environment"/>
+  </target>
+
   <!-- Delete All Data Folders and Datasets -->
   <!-- Normally only for testing from a clean configuration -->
   <target name="clean">

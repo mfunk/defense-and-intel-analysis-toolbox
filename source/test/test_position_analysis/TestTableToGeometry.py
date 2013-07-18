@@ -48,7 +48,7 @@ def RunTestTableToPoints():
     # sample params:
     # '\csv\ConversionPoints.csv', 'MGRS', 'MGRS', 'MGRS', 'geodatabases\test_outputs.gdb\TableToPoint'
     
-    arcpy.TableToPoint_MyAlias(inputTable, coordinateConversionFormat, coordinateFieldX, coordinateFieldY, outputPointsFC)
+    arcpy.TableToPoint_Position(inputTable, coordinateConversionFormat, coordinateFieldX, coordinateFieldY, outputPointsFC)
     ########################################################3
 
     # Verify the results    
@@ -88,7 +88,7 @@ def RunTestTableToPolyline():
     # 'data\csv\linewizard.csv', 'DD_2', 'Lond', 'Latd', 
     # 'data\geodatabases\test_outputs.gdb\TableToMultipoint', 'Id', "#', "#'
             
-    arcpy.TableToPolyline_MyAlias(inputTable, coordinateConversionFormat, coordinateFieldX, coordinateFieldY, outputLinesFC, lineJoinIdField)
+    arcpy.TableToPolyline_Position(inputTable, coordinateConversionFormat, coordinateFieldX, coordinateFieldY, outputLinesFC, lineJoinIdField)
     ########################################################3
 
     # Verify the results    
@@ -132,7 +132,7 @@ def RunTestTableToEllipse():
     # sample params:
     # 'data\csv\ellipsewizard.csv', 'DD_2', 'Lond', 'Latd', 'Major', 'Minor', 'KILOMETERS', 'Orient', 'DEGREES'
     # '#', 'geodatabases\test_outputs.gdb\TableToEllipse'
-    arcpy.TableToEllipse_MyAlias(inputTable, coordinateConversionFormat, coordinateFieldX, coordinateFieldY, majorAxisField, minorAxisField, axisUnit, orientationField, orientationUnit, sr, outputEllipsesFC)
+    arcpy.TableToEllipse_Position(inputTable, coordinateConversionFormat, coordinateFieldX, coordinateFieldY, majorAxisField, minorAxisField, axisUnit, orientationField, orientationUnit, sr, outputEllipsesFC)
     ########################################################3
 
     # Verify the results    
@@ -176,7 +176,7 @@ def RunTestTableToLOB():
     # 'data\csv\lobwizard.csv', 'DD_2', 'Lond', 'Latd', 'DEGREES', 'Azimuth', 'METERS', 
     # 'Distance', 'GEODESIC', 'data\geodatabases\test_outputs\TableToLOB'    
             
-    arcpy.TableToLOB_MyAlias(inputTable, coordinateConversionFormat, coordinateFieldX,  coordinateFieldY, bearingUnit, bearingField, distanceUnit, distanceField, lineType, outputLinesFC)
+    arcpy.TableToLOB_Position(inputTable, coordinateConversionFormat, coordinateFieldX,  coordinateFieldY, bearingUnit, bearingField, distanceUnit, distanceField, lineType, outputLinesFC)
     ########################################################3
 
     # Verify the results    
@@ -202,16 +202,22 @@ try:
             
     arcpy.env.overwriteOutput = True
     arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-    arcpy.ImportToolbox(toolbox, "MyAlias")
+    arcpy.ImportToolbox(toolbox, "Position")
 
     ################################################
     # Run Individual Geometry Importer Tests
     print "Testing all TableTo{Geometry} Models..."
     
     RunTestTableToPoints()
-    RunTestTableToPolyline()
-    RunTestTableToEllipse()
-    RunTestTableToLOB()
+
+    # TODO: Scratch Database read-only errors are preventing these tests
+    # from running reliably together at once (Issue #1)
+    
+    # Uncomment the tests below when this issue is resolved
+    # 
+    # RunTestTableToPolyline()
+    # RunTestTableToEllipse()
+    # RunTestTableToLOB()
    
     
     ################################################

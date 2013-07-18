@@ -1,4 +1,21 @@
-
+#------------------------------------------------------------------------------
+# Copyright 2013 Esri
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#------------------------------------------------------------------------------
+# RangeFan.py
+# Description: Create Range Fan
+# Requirements: ArcGIS Desktop Standard
+# -----------------------------------------------------------------------------
 
 # IMPORTS ==========================================
 import os, sys, math, traceback
@@ -25,17 +42,25 @@ def Geo2Arithmetic(inAngle):
 
 
 # ARGUMENTS & LOCALS ===============================
+argCount = arcpy.GetArgumentCount()
+
 inFeature = arcpy.GetParameterAsText(0)
 range = float(arcpy.GetParameterAsText(1)) #1000.0 # meters
 bearing = float(arcpy.GetParameterAsText(2)) #45.0 # degrees
 traversal = float(arcpy.GetParameterAsText(3)) #60.0 # degrees
 outFeature = arcpy.GetParameterAsText(4)
-webMercator = arcpy.GetParameterAsText(5)
+
+webMercator = ""
+if argCount >= 6 :
+    webMercator = arcpy.GetParameterAsText(5)
+    
 deleteme = []
 debug = True
 leftAngle = 0.0 # degrees
 rightAngle = 90.0 # degrees
 
+if (webMercator == "") or (webMercator is None) :
+    webMercator = arcpy.SpatialReference(r"WGS 1984 Web Mercator (Auxiliary Sphere)")
 
 try:
 
@@ -44,12 +69,11 @@ try:
     installInfo = arcpy.GetInstallInfo("desktop")
     installDirectory = installInfo["InstallDir"]
     GCS_WGS_1984 = os.path.join(installDirectory,r"Coordinate Systems", r"Geographic Coordinate Systems", r"World",r"WGS 1984.prj")
-    #webMercator = r"C:\Demos\Sprints\2 April 2012\Visibility and Range Template\Maps\Toolboxes\WGS 1984 Web Mercator (auxiliary sphere).prj" # os.path.join(installDirectory,r"Coordinate Systems",r"Projected Coordinate Systems", r"World",r"WGS 1984 Web Mercator (Auxiliary Sphere).prj")
     env.overwriteOutput = True
     scratch = env.scratchWorkspace
     
     prjInFeature = os.path.join(scratch,"prjInFeature")
-    arcpy.AddMessage(webMercator + "\n" + prjInFeature)
+    arcpy.AddMessage(str(webMercator) + "\n" + prjInFeature)
     arcpy.AddMessage("Projecting input points to Web Mercator ...")
     arcpy.Project_management(inFeature,prjInFeature,webMercator)
     deleteme.append(prjInFeature)

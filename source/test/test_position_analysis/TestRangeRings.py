@@ -53,7 +53,7 @@ def RunTest():
         
         arcpy.env.overwriteOutput = True
         arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "VandRAlias")
+        arcpy.ImportToolbox(toolbox, "Position")
     
         inputFeatureCount = int(arcpy.GetCount_management(inputPointsFC).getOutput(0)) 
         print "Input FeatureClass: " + str(inputPointsFC)
@@ -69,7 +69,7 @@ def RunTest():
            
         ########################################################3
         # Execute the Model under test:   
-        arcpy.RangeRings_VandRAlias(inputPointsFC, numberOfRings, ringInterval, distanceUnits, numberOfRadials, outputRangeRingsFC, outputRangeRadialsFC)
+        arcpy.RangeRings_Position(inputPointsFC, numberOfRings, ringInterval, distanceUnits, numberOfRadials, outputRangeRingsFC, outputRangeRadialsFC)
         ########################################################3
     
         # Verify the results    

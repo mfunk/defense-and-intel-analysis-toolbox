@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #------------------------------------------------------------------------------
-# Name: TestModelHighestPoint.py
-# Description: Automatic Test of Highest Point Model
+# Name: TestModelLocalPeaks.py
+# Description: Automatic Test of Local Peaks Model
 # Requirements: ArcGIS Desktop Standard with Spatial Analyst Extension
 #------------------------------------------------------------------------------
 
@@ -26,7 +26,19 @@ import TestUtilities
 
 def RunTest():
     try:
-        arcpy.AddMessage("Starting Test: HighestPoint")
+        arcpy.AddMessage("Starting Test: TestLocalPeaks")
+        
+        TEST_IMPLEMENTED = False
+        
+        if not TEST_IMPLEMENTED :
+            arcpy.AddWarning("***Test Not Yet Implemented***")
+            return
+        
+        # TODO: once model has a version that works with local surface data 
+        # (rather than image service), then finish this test/implementation below
+        #
+        # alternately you can add an image service connection in Catalog and 
+        # fill in the parameter below
         
         if arcpy.CheckExtension("Spatial") == "Available":
             arcpy.CheckOutExtension("Spatial")
@@ -34,15 +46,19 @@ def RunTest():
             # Raise a custom exception
             raise Exception("LicenseError")        
         
+        arcpy.env.overwriteOutput = True
+        arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
+                
         # WORKAROUND
         print "Creating New Scratch Workspace (Workaround)"    
         TestUtilities.createScratch()
             
         # Verify the expected configuration exists
         inputPolygonFC =  os.path.join(TestUtilities.inputGDB, "samplePolygonArea")
-        inputSurface =  os.path.join(TestUtilities.defaultGDB, "Jbad_SRTM_USGS_EROS")
-        outputPointsFC =  os.path.join(TestUtilities.outputGDB, "HighestPoint")
+        inputSurface =  "TODO_MUST_BE_IMAGE_SERVICE"
+        outputPointsFC =  os.path.join(TestUtilities.outputGDB, "LocalPeaks")
         toolbox = TestUtilities.toolbox
+        arcpy.ImportToolbox(toolbox, "MAoT")        
         
         # Check For Valid Input
         objects2Check = []
@@ -56,11 +72,7 @@ def RunTest():
         
         # Set environment settings
         print "Running from: " + str(TestUtilities.currentPath)
-        print "Geodatabase path: " + str(TestUtilities.geodatabasePath)
-        
-        arcpy.env.overwriteOutput = True
-        arcpy.env.scratchWorkspace = TestUtilities.scratchGDB
-        arcpy.ImportToolbox(toolbox, "VandR")
+        print "Geodatabase path: " + str(TestUtilities.geodatabasePath)    
     
         inputFeatureCount = int(arcpy.GetCount_management(inputPolygonFC).getOutput(0)) 
         print "Input FeatureClass: " + str(inputPolygonFC)
@@ -69,9 +81,11 @@ def RunTest():
         if (inputFeatureCount < 1) :
             print "Invalid Input Feature Count: " +  str(inputFeatureCount)                    
            
+        numberOfPeaks = 3
+           
         ########################################################3
         # Execute the Model under test:   
-        arcpy.HighestPoint_VandR(inputPolygonFC, inputSurface, outputPointsFC)
+        arcpy.FindLocalPeaks_MAoT(inputPolygonFC, numberOfPeaks, inputSurface, outputPointsFC)
         ########################################################3
     
         # Verify the results    
@@ -79,7 +93,7 @@ def RunTest():
         print "Output FeatureClass: " + str(outputPointsFC)
         print "Output Feature Count: " +  str(outputFeatureCount)
                 
-        if (outputPointsFC < 1) :
+        if (outputPointsFC < 3) :
             print "Invalid Output Feature Count: " +  str(outputFeatureCount) 
             raise Exception("Test Failed")
             
