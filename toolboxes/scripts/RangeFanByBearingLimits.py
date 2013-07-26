@@ -29,7 +29,7 @@ leftBearing = float(arcpy.GetParameterAsText(2)) #75.0 # degrees
 rightBearing = float(arcpy.GetParameterAsText(3)) #270.0 # degrees
 outFeature = arcpy.GetParameterAsText(4)
 deleteme = []
-debug = True
+debug = False
 leftAngle = 0.0 # degrees
 rightAngle = 90.0 # degrees
 

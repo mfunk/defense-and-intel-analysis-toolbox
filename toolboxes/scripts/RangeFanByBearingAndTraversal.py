@@ -29,7 +29,7 @@ geoBearing = float(arcpy.GetParameterAsText(2)) #45.0 # degrees
 traversal = float(arcpy.GetParameterAsText(3)) #60.0 # degrees
 outFeature = arcpy.GetParameterAsText(4)
 deleteme = []
-debug = True
+debug = False
 leftAngle = 0.0 # degrees
 rightAngle = 90.0 # degrees
 

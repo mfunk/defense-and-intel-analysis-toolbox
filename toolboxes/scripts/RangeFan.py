@@ -55,7 +55,7 @@ if argCount >= 6 :
     webMercator = arcpy.GetParameterAsText(5)
     
 deleteme = []
-debug = True
+debug = False
 leftAngle = 0.0 # degrees
 rightAngle = 90.0 # degrees
 
