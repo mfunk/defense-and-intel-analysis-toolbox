@@ -13,7 +13,7 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 
 ## <a id="Requirements"></a>Requirements
 
-* ArcGIS Desktop 10.1 Standard 
+* ArcGIS Desktop 10.1 (or later) Standard 
 * Apache Ant - used to download and extract dependent data and run test drivers
 * Java Runtime Environment (JRE) or Developer Kit (JDK)
 * Some tools require additional licenses (these tools will be disabled if license is unavailable):
@@ -63,7 +63,7 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 
 ## Contributing
 
-* Anyone and everyone is welcome to contribute.
+Esri welcomes contributions from anyone and everyone. Please see our [guidelines for contributing](https://github.com/esri/contributing).
 
 ## Licensing
 
