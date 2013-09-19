@@ -11,7 +11,16 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
 * Tools for analyzing the battlefield environment
 * Tools for position analysis
 
-## <a id="Requirements"></a>Requirements
+## Sections
+
+* [Requirements](#requirements)
+* [Instructions](#instructions)
+* [Resources](#resources)
+* [Issues](#issues)
+* [Contributing](#contributing)
+* [Licensing](#licensing)
+
+## Requirements
 
 * ArcGIS Desktop 10.1 (or later) Standard 
 * Apache Ant - used to download and extract dependent data and run test drivers
@@ -24,7 +33,7 @@ The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts
         * Path Slope Tools.tbx\Path Slope
         * Visibility and Range Tools.tbx\Range Fan
 
-## <a id="Instructions"></a>Instructions
+## Instructions
 
 ### General Help
 [New to Github? Get started here.](http://htmlpreview.github.com/?https://github.com/Esri/esri.github.com/blob/master/help/esri-getting-to-know-github.html)
