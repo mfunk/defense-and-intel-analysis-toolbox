@@ -1,5 +1,10 @@
 # defense-and-intel-analysis-toolbox
 
+**THE TOOLS IN THIS TOOLBOX HAVE BEEN MOVED **
+Use the solutions-geoprocessing-toolbox repo:
+[https://github.com/Esri/solutions-geoprocessing-toolbox](https://github.com/Esri/solutions-geoprocessing-toolbox)
+==========
+
 The ArcGIS Defense and Intelligence Analysis Toolbox is a set of models, scripts, and tools for use in ArcGIS Desktop. These tools provide specialized processing and workflows for defense and intelligence analysis.
 
 ![Image of Defense and Intel Analysis Toolbox](ScreenShot.jpg)
